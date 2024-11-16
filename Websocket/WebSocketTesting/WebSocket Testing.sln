@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocket Testing", "WebSocket Testing.csproj", "{96B606B4-97ED-4BE5-957B-0FBDCF52F835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocket Testing", "WebSocket Testing.csproj", "{96B606B4-97ED-4BE5-957B-0FBDCF52F835}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketClient", "..\WebSocketClient\WebSocketClient.csproj", "{ADED10AF-F104-4CEC-8B66-2ECB28672251}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketClient", "..\WebSocketClient\WebSocketClient.csproj", "{ADED10AF-F104-4CEC-8B66-2ECB28672251}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client2", "..\Client2\Client2.csproj", "{EA9BDD41-ED30-4C4E-B325-42E907B148C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client2", "..\Client2\Client2.csproj", "{EA9BDD41-ED30-4C4E-B325-42E907B148C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerWS", "..\ServerWS\ServerWS.csproj", "{40BD95BA-535B-4220-8FE0-07CB7EB919C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerWS", "..\ServerWS\ServerWS.csproj", "{40BD95BA-535B-4220-8FE0-07CB7EB919C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSocketChat", "..\SimpleSocketChat\SimpleSocketChat.csproj", "{2DE9FCED-8C50-43A6-8E53-12E5CDD7AA6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{40BD95BA-535B-4220-8FE0-07CB7EB919C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40BD95BA-535B-4220-8FE0-07CB7EB919C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40BD95BA-535B-4220-8FE0-07CB7EB919C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DE9FCED-8C50-43A6-8E53-12E5CDD7AA6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DE9FCED-8C50-43A6-8E53-12E5CDD7AA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DE9FCED-8C50-43A6-8E53-12E5CDD7AA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DE9FCED-8C50-43A6-8E53-12E5CDD7AA6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.WebSockets;
 using System.Text;
 using System.Text.Json;
@@ -11,19 +12,17 @@ builder.Services.AddLogging();
 var app = builder.Build();
 app.UseWebSockets();
 
-
-
 var connectionList = new ConcurrentDictionary<Guid, WebSocket>();
 //app.Map("/", () => "Hello World!");
 app.Map("/joinRoom", async context => {
-
+    LogThreadDetails();
     if (context.WebSockets.IsWebSocketRequest)
     {
         var ws = await context.WebSockets.AcceptWebSocketAsync();
         var id = Guid.NewGuid();
         connectionList.TryAdd(id, ws);
         var buffer = new ArraySegment<byte>(new byte[1024]);
-        while (ws.State == WebSocketState.Open)
+        if (ws.State == WebSocketState.Open)
         {
             var result = await ws.ReceiveAsync(buffer, CancellationToken.None);
             var parsedMessage = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);
@@ -33,12 +32,25 @@ app.Map("/joinRoom", async context => {
             }
         }
         connectionList.TryRemove(id, out var closedws);
+        Console.WriteLine($"Leaving Conn:#{id}");
     }
     else
     {
         Console.WriteLine("Boooooo!!!!");
     }
 });
+
+void LogThreadDetails()
+{
+    ProcessThreadCollection currentThreads = Process.GetCurrentProcess().Threads;
+    Console.WriteLine($"############################# Thread Details #{currentThreads.Count} ################################");
+    foreach (ProcessThread thread in currentThreads)
+    {
+        var reason = (thread.ThreadState == System.Diagnostics.ThreadState.Wait) ? thread.WaitReason.ToString() : "";
+        Console.WriteLine($"Thread#{thread.Id}, WaitingReason:{reason}, ThreadState: {thread.ThreadState}, StartTime:{thread.StartTime.ToString()}");
+    }
+    Console.WriteLine("#############################################################################\n");
+}
 
 async Task BroadCast(ArraySegment<byte> message)
 {
@@ -74,7 +86,7 @@ app.Map("/MimicClient", async context =>
 
     await client.SendAsync(msgToSend, WebSocketMessageType.Text, true, CancellationToken.None);
     var bufferReceived = new ArraySegment<byte>(new byte[1024]);
-    while (client.State != WebSocketState.Aborted)
+    while (client.State != WebSocketState.Closed)
     {
         var result = await client.ReceiveAsync(bufferReceived, CancellationToken.None);
         var decodeMessage = Encoding.UTF8.GetString(bufferReceived.Array, 0, result.Count);
